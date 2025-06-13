@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 from fastapi import FastAPI, Request, Depends, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
@@ -8,6 +9,7 @@ from sqlalchemy.orm import sessionmaker
 from models import User, Event, EventJoin, Base
 import datetime
 
+load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///db.sqlite")
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(bind=engine)
