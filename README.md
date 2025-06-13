@@ -20,19 +20,20 @@
 4. Copy `.env.example` to `.env` and set your variables.
 5. Run DB migrations:
     ```
-    python models.py
+    python -m invevent.models
     ```
 6. Run the webserver (FastAPI and bot can be run together or as separate processes):
     ```
-    uvicorn main:app --host 0.0.0.0 --port 443 --ssl-keyfile /path/to/key.pem --ssl-certfile /path/to/cert.pem
-    python bot.py
+    uvicorn invevent.web.main:app --host 0.0.0.0 --port 443 --ssl-keyfile /path/to/key.pem --ssl-certfile /path/to/cert.pem
+    python -m invevent.bot
     ```
 7. Point your reverse proxy (nginx/Caddy) to FastAPI (port 443 or as you wish).
 8. Register your webapp URL in [BotFather](https://t.me/botfather).
 
 **Useful files:**
-- `main.py` — FastAPI API + webview
-- `bot.py` — aiogram Telegram bot
-- `models.py` — SQLAlchemy ORM, db creation
-- `templates/webapp.html` — Jinja2 template with Leaflet.js
-- `static/` — contains CSS and JS (Leaflet)
+- `invevent/web/main.py`  FastAPI API + webview
+- `invevent/bot/main.py`  aiogram Telegram bot
+- `invevent/models.py`  SQLAlchemy ORM, db creation
+- `templates/webapp.html`  Jinja2 template with Leaflet.js
+- `static/`  contains CSS and JS (Leaflet)
+
