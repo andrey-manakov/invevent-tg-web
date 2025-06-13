@@ -5,7 +5,7 @@ from aiogram.types import WebAppInfo, KeyboardButton, ReplyKeyboardMarkup
 from aiogram.filters import Command
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from invevent.models import User, Event, Friend, EventJoin
+from invevent.models import User
 from dotenv import load_dotenv
 
 load_dotenv()
