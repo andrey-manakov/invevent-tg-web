@@ -32,7 +32,7 @@ async def start(message: types.Message):
     kb = ReplyKeyboardMarkup(keyboard=[
         [KeyboardButton(text="Open Event Map", web_app=WebAppInfo(url=WEBAPP_URL))]
     ], resize_keyboard=True)
-    await message.answer("Welcome to Invevent! Use the button below to see and create events.", reply_markup=kb)
+    await message.answer("Welcome to Invevent! Use the button below to see and create events!", reply_markup=kb)
     session.close()
 
 # More handlers for /addevent, /myevents, /friends, etc. can be added here
