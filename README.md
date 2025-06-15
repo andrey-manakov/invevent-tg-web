@@ -37,3 +37,22 @@
 - `templates/webapp.html`  Jinja2 template with Leaflet.js
 - `static/`  contains CSS and JS (Leaflet)
 
+## Deploying to a VPS
+
+The repository includes a workflow `.github/workflows/deploy.yml` that deploys
+the latest commit to your server.  The workflow connects to your VPS via SSH,
+pulls the repository, removes `db.sqlite`, and restarts the systemd services
+`invevent-api` and `invevent-bot`.
+
+### Setup
+
+1. On your VPS clone this repository and create two systemd services named
+   `invevent-api` and `invevent-bot` that start the FastAPI app and the bot.
+2. Add the following repository secrets on GitHub:
+   - `VPS_HOST` – server hostname or IP.
+   - `VPS_USER` – SSH user.
+   - `VPS_KEY` – private SSH key for the user.
+   - `VPS_PATH` – path to the project directory on the server.
+   - `VPS_PORT` – SSH port (optional, defaults to 22).
+3. Push to the `main` branch to trigger the workflow and deploy.
+
