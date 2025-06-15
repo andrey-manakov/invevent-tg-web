@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, Text, ForeignKey, BigInteger
 from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.engine.url import make_url
 import os
 
 Base = declarative_base()
@@ -40,5 +41,16 @@ def init_db():
     engine = create_engine(DATABASE_URL, echo=True)
     Base.metadata.create_all(engine)
 
+def ensure_db():
+    """Create the database if it does not exist."""
+    url = make_url(DATABASE_URL)
+    if url.drivername == "sqlite":
+        db_path = url.database
+        if db_path and not os.path.exists(db_path):
+            init_db()
+    else:
+        # For other engines, create tables if they do not exist
+        init_db()
+
 if __name__ == "__main__":
-    init_db()
+    ensure_db()

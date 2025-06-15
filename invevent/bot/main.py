@@ -5,7 +5,7 @@ from aiogram.types import WebAppInfo, KeyboardButton, ReplyKeyboardMarkup
 from aiogram.filters import Command
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from invevent.models import User
+from invevent.models import User, ensure_db
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -14,6 +14,7 @@ TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 WEBAPP_URL = os.getenv("WEBAPP_URL", "https://your.domain/webapp")
 
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///db.sqlite")
+ensure_db()  # create DB if it doesn't exist
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(bind=engine)
 

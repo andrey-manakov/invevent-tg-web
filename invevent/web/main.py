@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from invevent.models import Event
+from invevent.models import Event, ensure_db
 
 from dotenv import load_dotenv
 
@@ -15,6 +15,7 @@ load_dotenv()
 
 
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///db.sqlite")
+ensure_db()  # create DB if it doesn't exist
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(bind=engine)
 BASE_DIR = Path(__file__).resolve().parents[2]
